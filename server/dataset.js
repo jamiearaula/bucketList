@@ -1,4 +1,4 @@
-var fs = Npm.require('fs');
+// var fs = Npm.require('fs');
 
 function setGoals(){
 
