@@ -1,5 +1,5 @@
 <template name="travel">
-	<div class="container">
+	<div class="container-fluid" style="background-color: whitesmoke;">
 		<div class="row">
 			<div class="col-xs-12">
 				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add a goal</button>
@@ -44,8 +44,39 @@
 		 	</div>
 		</div>
 
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<p class="category-title centered">TRAVEL</p>
+				</li>
 
+				{{ #each travel }}
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-xs-4">
+								<img class="img-responsive img-rounded" src="{{ goalImage kFkaBi3CzxrZQaTit }}">
+							</div>
+						
+							<div class="col-xs-6">
+								<h4 class="list-group-item-heading">{{ description }}</h4>
+    							<p class="list-group-item-text">Lorem ipsum doler sit amet.</p>
+							</div>
 
+							<div class="col-xs-2">
+								<div class="pull-right">
+									asdfad
+								</div>
+							</div>
+						</div>
+					
+					</li>
+				{{ /each }}
+			</ul>
+		</div>
+</div>
+
+<input type="file" id="file-input">
 
 		<div class="row">
 			{{#each travel}}

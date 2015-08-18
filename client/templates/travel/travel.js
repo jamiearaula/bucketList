@@ -1,5 +1,12 @@
 
 Template.travel.events({
+
+	'change #file-input' : function(event) {
+		var file = event.target.files[0];
+		var fileId = Images.insert(file);
+		console.log(fileId._id);
+	},
+
 	'click #add-btn': function(event) {
 		event.preventDefault();
 		$(event.target).blur();
@@ -7,7 +14,7 @@ Template.travel.events({
 		var new_description = $('#new_description').val();
 		Travel.insert({
 			name: new_goal,
-			description: new_description
+			description: new_description,
 		});
 
 		document.getElementById("new_goal").value = "";
@@ -46,6 +53,10 @@ Template.travel.helpers({
 
  'achievement': function () {
     return Achievements.find({"category" : "travel"});
+  },
+
+  'goalImage': function (fileId) {
+  	return Images.findOne( { "_id" : fileId});
   }
 
 });

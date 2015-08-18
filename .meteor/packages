@@ -13,3 +13,5 @@ mrt:jquery-ui
 accounts-ui
 accounts-password
 email
+cfs:standard-packages
+cfs:filesystem

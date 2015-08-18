@@ -1,0 +1,27 @@
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+.category-title {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	font-size: 3em;
+}
+
+.centered {
+	text-align: center;
+}
+
+.bucket-list {
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+}
+
+.goal {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+.thumbnail {
+	max-width: 100px;
+	max-height: 100px;
+}
