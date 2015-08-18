@@ -1,3 +1,14 @@
+function previewPhoto(input) {
+	if (input[0]) {
+		var reader = new FileReader();
+
+		reader.readAsDataURL(event.target.files[0]);
+
+		reader.onload = function (e) {
+			$('#myImg').attr('src', e.target.result);
+		}
+	}
+}
 
 Template.travel.events({
 
@@ -5,6 +16,9 @@ Template.travel.events({
 		var file = event.target.files[0];
 		var fileId = Images.insert(file);
 		console.log(fileId._id);
+		$('#myImg').removeProp("hidden");
+		previewPhoto(event.target.files);
+		
 	},
 
 	'click #add-btn': function(event) {
@@ -55,8 +69,14 @@ Template.travel.helpers({
     return Achievements.find({"category" : "travel"});
   },
 
-  'goalImage': function (fileId) {
-  	return Images.findOne( { "_id" : fileId});
+  'image' : function(){
+  	return Images.find();
+  },
+
+  'goalImage': function () {
+  	return Images.findOne().url();
   }
+
+
 
 });

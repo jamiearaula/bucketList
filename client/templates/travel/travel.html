@@ -1,12 +1,13 @@
 <template name="travel">
 	<div class="container-fluid" style="background-color: whitesmoke;">
-		<div class="row">
+		<!--<div class="row">
 			<div class="col-xs-12">
 				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add a goal</button>
 
 			</div>	
 		</div>	
 
+		-->
 		<div id="myModal" class="modal fade" role="dialog">
 		  	<div class="modal-dialog">
 				<div class="modal-content">
@@ -22,7 +23,13 @@
 				              <label for="new_goal">Goal</label>
 				              <input type="text" class="form-control" id="new_goal">
 				            </div>
-
+				            
+				            <div class="form-group">
+				            	<label for="new_image">Upload an Image</label>
+				            	<input type="file" id="file-input">
+				            	<img id="myImg" src="#" alt="your image" hidden />
+				            </div>	
+							
 				            <div class="form-group">
 				              <label for="new_description">Description</label>
 				              <textarea rows="4" cols="50" type="text" class="form-control" id="new_description"></textarea>
@@ -44,44 +51,60 @@
 		 	</div>
 		</div>
 
-	<div class="row">
-		<div class="col-xs-6 col-xs-offset-3">
-			<ul class="list-group">
-				<li class="list-group-item">
-					<p class="category-title centered">TRAVEL</p>
-				</li>
-
-				{{ #each travel }}
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3">
+				<ul class="list-group">
 					<li class="list-group-item">
-						<div class="row">
-							<div class="col-xs-4">
-								<img class="img-responsive img-rounded" src="{{ goalImage kFkaBi3CzxrZQaTit }}">
-							</div>
-						
-							<div class="col-xs-6">
-								<h4 class="list-group-item-heading">{{ description }}</h4>
-    							<p class="list-group-item-text">Lorem ipsum doler sit amet.</p>
-							</div>
+						<div id="category-name">
+							<p class="category-title centered">TRAVEL</p>
+						</div>	
 
-							<div class="col-xs-2">
-								<div class="pull-right">
-									asdfad
+						<div>
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Travel Goal</button>
+						</div>
+					</li>
+
+					{{ #each travel image }}
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-4">
+									
+									<img class="img-responsive img-rounded" src="{{ goalImage }}">
+									
+								</div>
+							
+								<div class="col-xs-4">
+									<h4 class="list-group-item-heading">{{ description }}</h4>
+	    							<p class="list-group-item-text">Lorem ipsum doler sit amet.</p>
+								</div>
+
+								<div class="col-xs-4">
+									<div class="pull-right">
+										<div class="row">
+											<button type="button" id="btnAchieve" class="btn btn-default btn-sm">Achieve</button>
+										</div>
+										
+										<div class="row">
+											<button type="button" id="btnAddGoal" class="btn btn-default btn-sm">Add this Goal</button>
+										</div>	
+									</div>
 								</div>
 							</div>
-						</div>
-					
-					</li>
-				{{ /each }}
-			</ul>
+						
+						</li>
+					{{ /each }}
+				</ul>
+			</div>
 		</div>
-</div>
 
-<input type="file" id="file-input">
+
+		<!--
 
 		<div class="row">
 			{{#each travel}}
 				<div class="col-xs-3 goal">
 					{{description}}
+
 					<button type="button" id="btnAchieve" class="btn btn-default btn-sm">
 			          <span class="glyphicon glyphicon-ok"></span>Achieve
 			        </button>
@@ -89,7 +112,6 @@
 			{{/each}}
 		</div>	
 		
-
 
 
 		<div class="row">
@@ -102,6 +124,6 @@
 				</div>	
 			{{/each}}
 		</div>
-
+	-->
 	</div>	
 </template>	

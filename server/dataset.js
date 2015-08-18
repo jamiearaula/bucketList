@@ -1,4 +1,4 @@
-// var fs = Npm.require('fs');
+var fs = Npm.require('fs');
 
 function setGoals(){
 
@@ -24,6 +24,27 @@ function setGoals(){
 
 
 
+function setDefaultPhoto(){
+   
+    var parisPhoto = fs.readFileSync('../../../../../public/img/cali.jpg');
+    var parisFile = new FS.File();
+    parisFile.attachData(parisPhoto, {type: 'image/jpeg'}, function(error){
+        if(error) throw error;
+        parisFile.name('parisPhoto.jpg');
+        Images.insert(parisFile);
+    });
+
+
+     /**var caliPhoto =  fs.readFileSync('../../../../../public/img/cali.jpg');    
+     var caliFile = new FS.File();
+     caliFile.attachData(caliPhoto, {type: 'image/jpeg'}, function(error){
+        if(error) throw error;
+        caliFile.name('caliPhoto.jpg');
+        Images.insert(caliFile);
+    });**/
+}
+
+
 
 function setTravel(){
 
@@ -35,7 +56,7 @@ function setTravel(){
 
 	Travel.insert({
 		name: 'Italy',
-		description: 'Travel to Italy'
+		description: 'Travel to California'
 	});
 
 	Travel.insert({
@@ -105,3 +126,4 @@ resetCollection(Goal,setGoals);
 resetCollection(Travel,setTravel);
 resetCollection(Food,setFood);
 resetCollection(Music,setMusic);
+resetCollection(Images, setDefaultPhoto);
