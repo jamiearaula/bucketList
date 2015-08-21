@@ -24,6 +24,10 @@ Template.home.events({
 Template.home.helpers({
   'goal': function () {
     return Goal.find();
+  },
+
+  'video' : function(){
+  	return Videos.findOne().url();
   }
 
 });

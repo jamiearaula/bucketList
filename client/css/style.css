@@ -1,14 +1,41 @@
 
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
 .category-title {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 700;
 	font-size: 3em;
+
+}
+.btTxt:hover{
+	opacity: 0.3;
+
 }
 
-.centered {
-	text-align: center;
+.achievement-category-type{
+ font-family: 'Montserrat', sans-serif;
+}
+
+.achievement-name{
+
+	padding-top: 1em;
+}
+
+.btTxt-icon{
+	visibility: hidden;
+
+}
+
+.btn-icons{
+	height: 64px;
+	width:70px;
+}
+
+.goal-name{
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 3em;
+	font-weight: 20;
 }
 
 .bucket-list {
@@ -26,7 +53,16 @@
 	max-height: 100px;
 }
 
-.travels{
+.category-name{
+	height:250px;
+	background-image: url(https://secure.static.tumblr.com/f2ba0834c6d47be5e96d94afdffed5ec/fnrhsh7/4jFmsu89w/tumblr_static_road.jpg);
 	background-repeat: no-repeat;
- 	background-size: 719px 82px;
+ 	background-size: 100% 100%;
+
+}
+
+.category-type > p {
+	padding-top: 8%;
+	padding-right: 8%;
+
 }

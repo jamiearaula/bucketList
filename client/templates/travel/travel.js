@@ -1,62 +1,109 @@
-function previewPhoto(input) {
+function previewPhoto(address,input) {
 	if (input[0]) {
 		var reader = new FileReader();
 
 		reader.readAsDataURL(event.target.files[0]);
 
 		reader.onload = function (e) {
-			$('#myImg').attr('src', e.target.result);
+			$(address).css('width', '500px');
+    		$(address).css('height', '250px');
+			$(address).attr('src', e.target.result);
 		}
 	}
 }
 
 Template.travel.events({
 
-	'change #file-input' : function(event) {
-		var file = event.target.files[0];
-		var fileId = Images.insert(file);
-		console.log(fileId._id);
-		$('#myImg').removeProp("hidden");
-		previewPhoto(event.target.files);
+	'change #fileNewGoal-input' : function(event) {
+		var inputFile = event.target.files[0];
+		var fsFile = new FS.File(inputFile);
 		
+		Images.insert(fsFile, function (error, fileObject ) {
+			if (error) {
+				showErrorMessage(error.reason);
+			}
+
+			else {
+				Session.set('fileAddGoal-input', fileObject._id);
+			}
+		});
+
+		$('#new_goalImg').removeProp("hidden");
+		previewPhoto('#new_goalImg',event.target.files);
+	},
+
+	'change #fileSnap-input' : function(event) {
+		var inputFile = event.target.files[0];
+		var fsFile = new FS.File(inputFile);
+		
+		Images.insert(fsFile, function (error, fileObject ) {
+			if (error){
+				showErrorMessage(error.reason);
+			}
+
+			else {
+				Session.set('fileSnapGoal-input', fileObject._id);
+			}
+		});
+
+		$('#highlightImg').removeProp("hidden");
+		
+    	
+		previewPhoto('#highlightImg',event.target.files);
 	},
 
 	'click #add-btn': function(event) {
-		event.preventDefault();
-		$(event.target).blur();
-		var new_goal= $('#new_goal').val();
+		var new_goal = $('#new_goal').val();
 		var new_description = $('#new_description').val();
+		var url = Session.get('fileAddGoal-input');
+
 		Travel.insert({
 			name: new_goal,
 			description: new_description,
+			img: url
 		});
 
 		document.getElementById("new_goal").value = "";
 		document.getElementById("new_description").value = "";
     },
 
+
     'click #btnAchieve': function(event) {
-		event.preventDefault();
-		$(event.target).blur();
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; 
 		var yyyy = today.getFullYear();
-		var date = mm+'/'+dd+'/'+yyyy;
-		Achievements.insert({
-			name: this.name,
-			description: this.description,
-			category: 'travel',
-			achieved_date: date
-		});
-
+		var date = mm + '/' + dd + '/' + yyyy;
 		
+		Session.set("dateAchieved",date);
+		Session.set("id", this._id);
+		Session.set("name",this.name);
+		Session.set("description",this.description);
+		Session.set("category",'travel');
+    },
+
+    'click #save-btn': function(event) {3
+		var feedback = $('#feedback').val();
+		var tips = $('tips').val();
+		var url = Session.get('fileSnapGoal-input');
+
+		Achievements.insert({
+			name: Session.get("name"),
+			description: Session.get("description"),
+			category:  Session.get("category") ,
+			achieved_date: Session.get("dateAchieved"),
+			feedback: feedback,
+			tips: tips,
+			img: url
+		});
 
 		Travel.remove({
-			"_id" : this._id
+			"_id" : Session.get("id")
 		});
-    }
 
+		document.getElementById("tips").value = "";
+		document.getElementById("feedback").value = "";
+    }
 
 });
 
@@ -69,14 +116,10 @@ Template.travel.helpers({
     return Achievements.find({"category" : "travel"});
   },
 
-  'image' : function(){
-  	return Images.find();
-  },
+  'goalImage': function (imageid) { 
+  	return Images.findOne({ _id : imageid }).url();
 
-  'goalImage': function () {
-  	return Images.findOne().url();
   }
-
 
 
 });
